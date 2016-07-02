@@ -13,10 +13,15 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        do {
-            try Poet().test()
-        } catch {
-
+        if let
+            path = NSBundle.mainBundle().pathForResource("lstm_text_generation_weights", ofType: "h5"),
+            poet = Poet(pathToTrainedWeights: path)
+        {
+            poet.prepareToEvaluate(
+                seed: "e",
+                completion: { (prepared) in
+                    poet.startEvaluating()
+            })
         }
     }
 
