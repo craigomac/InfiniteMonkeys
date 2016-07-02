@@ -1,0 +1,10 @@
+framework module Upsurge {
+  umbrella header "Upsurge.h"
+
+  export *
+  module * { export * }
+}
+
+module Upsurge.Swift {
+    header "Upsurge-Swift.h"
+}

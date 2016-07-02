@@ -1,0 +1,10 @@
+framework module BrainCore {
+  umbrella header "BrainCore.h"
+
+  export *
+  module * { export * }
+}
+
+module BrainCore.Swift {
+    header "BrainCore-Swift.h"
+}

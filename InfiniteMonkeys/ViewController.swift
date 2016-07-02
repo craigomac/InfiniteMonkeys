@@ -13,7 +13,11 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        do {
+            try Poet().test()
+        } catch {
+
+        }
     }
 
     override var representedObject: AnyObject? {
@@ -21,7 +25,8 @@ class ViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
-
+    
+    
 
 }
 

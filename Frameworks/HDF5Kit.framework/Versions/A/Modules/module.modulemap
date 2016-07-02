@@ -1,0 +1,10 @@
+framework module HDF5Kit {
+  umbrella header "HDF5Kit.h"
+
+  export *
+  module * { export * }
+}
+
+module HDF5Kit.Swift {
+    header "HDF5Kit-Swift.h"
+}
