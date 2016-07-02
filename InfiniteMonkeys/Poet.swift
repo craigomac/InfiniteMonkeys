@@ -24,6 +24,8 @@ class Poet {
     var denseLayer: InnerProductLayer?
     var evaluator: Evaluator?
 
+    let semaphore = dispatch_semaphore_create(0)
+
     var device: MTLDevice {
         guard let d = MTLCreateSystemDefaultDevice() else {
             fatalError("Failed to create a Metal device")
@@ -202,44 +204,44 @@ class Poet {
         }
     }
     
-    func startEvaluating() -> Bool {
-        guard let evaluator = self.evaluator, dataLayer = self.dataLayer, denseLayer = self.denseLayer else {
+    func startEvaluating(callback: (string: String) -> ()) -> Bool {
+        guard let evaluator = self.evaluator, dataLayer = self.dataLayer, denseLayer = self.denseLayer, semaphore = self.semaphore else {
             return false
         }
         
-        let semaphore = dispatch_semaphore_create(0)
-        
-        while true {
-            evaluator.evaluate { (snapshot) in
-                let output = [Float](snapshot.outputOfLayer(denseLayer)!)
-                
-                let exps = output.map(expf)
-                let sum  = exps.reduce(0, combine: +)
-                let softmax = exps / sum
-                
-                var index = 0, maxValue: Float = 0, maxIndex = 0
-                softmax.forEach({ (value) in
-                    if value > maxValue {
-                        maxIndex = index
-                        maxValue = value
-                    }
-                    index += 1
-                })
-                
-                print(self.chars[maxIndex], terminator: "")
-                
-                let input = Matrix<Float>(rows: 1, columns: self.inputSize)
-                for i in 0..<self.inputSize {
-                    // Input vector with '1' at the index of the character we will pass in
-                    input[0, i] = (self.chars[i] == self.chars[maxIndex]) ? 1 : 0
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+
+            while true {
+                evaluator.evaluate { (snapshot) in
+                    let output = [Float](snapshot.outputOfLayer(denseLayer)!)
+                    
+                    let exps = output.map(expf)
+                    let sum  = exps.reduce(0, combine: +)
+                    let softmax = exps / sum
+                    
+                    var index = 0, maxValue: Float = 0, maxIndex = 0
+                    softmax.forEach({ (value) in
+                        if value > maxValue {
+                            maxIndex = index
+                            maxValue = value
+                        }
+                        index += 1
+                    })
+
+                    let char = self.chars[maxIndex]
+                    // print(self.chars[maxIndex], terminator: "")
+                    
+                    callback(string: char)
+
+                    dataLayer.data = self.inputFromChar(char).elements
+                    
+                    dispatch_semaphore_signal(semaphore);
                 }
-                
-                dataLayer.data = input.elements
-                
-                dispatch_semaphore_signal(semaphore);
+                dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
             }
-            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
         }
+
+        return true
     }
     
 }
