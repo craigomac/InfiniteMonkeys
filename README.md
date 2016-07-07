@@ -1,5 +1,5 @@
 # InfiniteMonkeys
-A Keras-trained RNN to emulate the works of a famous poet, powered by BrainCore
+A Keras-trained RNN to emulate the works of a famous poet, powered by BrainCore and hosted in an OS X Cocoa application with a very basic UI.
 
 ## What?
 
