@@ -11,9 +11,21 @@ import Cocoa
 class ViewController: NSViewController {
 
     @IBOutlet var textView: NSTextView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBOutlet weak var startStopButton: NSButton!
+    var poet: Poet?
+
+    @IBAction func clickedStartStopButton(sender: AnyObject?) {
+        if let poet = self.poet {
+            poet.stopEvaluating()
+            startStopButton.title = "Start"
+            self.poet = nil
+            return
+        }
+
+        startStopButton.enabled = false
+        startStopButton.title = "Stop"
+        
+        self.textView.textStorage?.setAttributedString(NSAttributedString(string: "...", attributes: [NSFontAttributeName: self.textView.font!]))
 
         if let
             path = NSBundle.mainBundle().pathForResource("lstm_text_generation_weights", ofType: "h5"),
@@ -22,12 +34,12 @@ class ViewController: NSViewController {
             poet.prepareToEvaluate(
                 seed: "e",
                 completion: { (prepared) in
-                    
-                    self.textView.textStorage?.setAttributedString(NSAttributedString(string: "...", attributes: [NSFontAttributeName: self.textView.font!]))
                     var count = 0
                     
                     poet.startEvaluating({ (string) in
                         dispatch_async(dispatch_get_main_queue()) {
+                            self.startStopButton.enabled = true
+                            
                             count += 1
                             let scroll = abs(NSMaxY(self.textView.visibleRect) - NSMaxY(self.textView.bounds)) < 50
                             self.textView.textStorage?.mutableString.appendString(string)
@@ -37,15 +49,10 @@ class ViewController: NSViewController {
                         }
                     })
             })
-        }
-    }
 
-    override var representedObject: AnyObject? {
-        didSet {
-        // Update the view, if already loaded.
+            self.poet = poet
         }
     }
-    
     
 
 }

@@ -22,6 +22,7 @@ class Poet {
     var weightsFile: File?
     var dataLayer: Source?
     var denseLayer: InnerProductLayer?
+    var net: Net?
     var evaluator: Evaluator?
 
     let semaphore = dispatch_semaphore_create(0)
@@ -185,16 +186,12 @@ class Poet {
                 let dataLayer = Source(name: "input", data: input.elements, batchSize: batchSize)
                 let sink = Sink(name: "sink", inputSize: inputSize, batchSize: 1)
 
-                let net = Net.build {
+                self.dataLayer = dataLayer      // input
+                self.denseLayer = denseLayer    // output
+
+                self.net = Net.build {
                     dataLayer => layer1 => layer2 => denseLayer => sink
                 }
-
-                let evaluator = try Evaluator(net: net, device: self.device)
-                
-                self.dataLayer = dataLayer
-                self.denseLayer = denseLayer
-                self.evaluator = evaluator
-
             } catch {
                 completion(prepared: false)
                 return
@@ -205,13 +202,23 @@ class Poet {
     }
     
     func startEvaluating(callback: (string: String) -> ()) -> Bool {
-        guard let evaluator = self.evaluator, dataLayer = self.dataLayer, denseLayer = self.denseLayer, semaphore = self.semaphore else {
+        guard let net = self.net, dataLayer = self.dataLayer, denseLayer = self.denseLayer, semaphore = self.semaphore else {
             return false
         }
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+        do {
+            self.evaluator = try Evaluator(net: net, device: self.device)
+        } catch {
+            return false
+        }
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
 
             while true {
+                guard let evaluator = self.evaluator else {
+                    return
+                }
+
                 evaluator.evaluate { (snapshot) in
                     let output = [Float](snapshot.outputOfLayer(denseLayer)!)
                     
@@ -234,7 +241,7 @@ class Poet {
                     callback(string: char)
 
                     dataLayer.data = self.inputFromChar(char).elements
-                    
+
                     dispatch_semaphore_signal(semaphore);
                 }
                 dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
@@ -242,6 +249,10 @@ class Poet {
         }
 
         return true
+    }
+    
+    func stopEvaluating() {
+        self.evaluator = nil
     }
     
 }
