@@ -10,6 +10,21 @@ import Upsurge
 import HDF5Kit
 import Metal
 
+func sample(output: ValueArray<Float>, temperature: Float) -> Int {
+    var a = log(output) / temperature
+    a = exp(a) / sum(exp(a))
+    
+    while true {
+        for (index, prob) in a.enumerate() {
+            let random = Float(arc4random()) / 0xFFFFFFFF
+            if random < prob {
+                return index
+            }
+        }
+    }
+}
+
+
 /// This class generates characters from weights trained by the Keras example `lstm_text_generation.py`.
 class Poet {
 
@@ -25,7 +40,7 @@ class Poet {
     var denseLayer: InnerProductLayer?
     var net: Net?
     var evaluator: Evaluator?
-
+    var temperature: Float = 0.5
     let semaphore = dispatch_semaphore_create(0)
 
     var device: MTLDevice {
@@ -227,16 +242,9 @@ class Poet {
                     let sum  = exps.reduce(0, combine: +)
                     let softmax = exps / sum
                     
-                    var index = 0, maxValue: Float = 0, maxIndex = 0
-                    softmax.forEach({ (value) in
-                        if value > maxValue {
-                            maxIndex = index
-                            maxValue = value
-                        }
-                        index += 1
-                    })
-
-                    let char = self.chars[maxIndex]
+                    let index = sample(softmax, temperature: self.temperature)
+                    
+                    let char = self.chars[index]
                     // print(self.chars[maxIndex], terminator: "")
                     
                     callback(string: char)

@@ -656,6 +656,7 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="600" height="480"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <value key="minSize" type="size" width="600" height="480"/>
                     </window>
                     <connections>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
@@ -719,18 +720,41 @@
                                     <action selector="clickedStartStopButton:" target="XfG-lQ-9wD" id="ygO-eb-Xny"/>
                                 </connections>
                             </button>
+                            <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hlN-P2-21t">
+                                <rect key="frame" x="426" y="439" width="196" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="192" id="OIN-kp-fhv"/>
+                                </constraints>
+                                <sliderCell key="cell" lineBreakMode="charWrapping" state="on" alignment="left" minValue="0.10000000000000001" maxValue="1.5" doubleValue="0.80000000000000004" tickMarkPosition="above" numberOfTickMarks="10" sliderType="linear" id="67H-h0-Jvi"/>
+                                <connections>
+                                    <action selector="adjustedTemperatureSlider:" target="XfG-lQ-9wD" id="zdV-MP-Fm3"/>
+                                </connections>
+                            </slider>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LVs-9O-Juz">
+                                <rect key="frame" x="489" y="426" width="71" height="14"/>
+                                <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Temperature" id="Qkl-u5-Fbd">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="PWf-eB-ra4" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="0da-wv-JgF"/>
                             <constraint firstItem="CC9-wO-rf8" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="6sE-PT-Cxq"/>
                             <constraint firstItem="CC9-wO-rf8" firstAttribute="top" secondItem="PWf-eB-ra4" secondAttribute="bottom" constant="20" id="AiW-gG-Cbg"/>
                             <constraint firstAttribute="bottom" secondItem="CC9-wO-rf8" secondAttribute="bottom" id="Fee-Ba-Qqa"/>
+                            <constraint firstItem="LVs-9O-Juz" firstAttribute="centerX" secondItem="hlN-P2-21t" secondAttribute="centerX" id="Rq2-zw-Iy1"/>
+                            <constraint firstItem="hlN-P2-21t" firstAttribute="centerY" secondItem="PWf-eB-ra4" secondAttribute="centerY" constant="-3" id="UmM-MQ-lsx"/>
                             <constraint firstItem="PWf-eB-ra4" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="W5x-hU-xNJ"/>
+                            <constraint firstAttribute="trailing" secondItem="hlN-P2-21t" secondAttribute="trailing" constant="20" id="gfV-ee-tuH"/>
                             <constraint firstAttribute="trailing" secondItem="CC9-wO-rf8" secondAttribute="trailing" id="kPu-Hd-ymI"/>
+                            <constraint firstItem="LVs-9O-Juz" firstAttribute="top" secondItem="hlN-P2-21t" secondAttribute="bottom" constant="1" id="quV-Al-VRG"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="startStopButton" destination="PWf-eB-ra4" id="ixs-GB-6lG"/>
+                        <outlet property="temperatureSlider" destination="hlN-P2-21t" id="evn-4b-taR"/>
                         <outlet property="textView" destination="AGX-j2-cBg" id="RQw-aW-fcw"/>
                     </connections>
                 </viewController>

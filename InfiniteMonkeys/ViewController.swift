@@ -11,7 +11,9 @@ import Cocoa
 class ViewController: NSViewController {
 
     @IBOutlet var textView: NSTextView!
-    @IBOutlet weak var startStopButton: NSButton!
+    @IBOutlet var startStopButton: NSButton!
+    @IBOutlet var temperatureSlider: NSSlider!
+    
     var poet: Poet?
 
     @IBAction func clickedStartStopButton(sender: AnyObject?) {
@@ -31,6 +33,8 @@ class ViewController: NSViewController {
             path = NSBundle.mainBundle().pathForResource("lstm_text_generation_weights", ofType: "h5"),
             poet = Poet(pathToTrainedWeights: path)
         {
+            poet.temperature = temperatureSlider.floatValue
+
             poet.prepareToEvaluate(
                 seed: "e",
                 completion: { (prepared) in
@@ -54,6 +58,9 @@ class ViewController: NSViewController {
         }
     }
     
+    @IBAction func adjustedTemperatureSlider(sender: AnyObject?) {
+        poet?.temperature = temperatureSlider.floatValue
+    }
 
 }
 
