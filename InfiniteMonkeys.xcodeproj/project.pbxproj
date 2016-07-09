@@ -32,6 +32,7 @@
 /* Begin PBXFileReference section */
 		55B5FB370C546970D94E5F35 /* Pods-InfiniteMonkeys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfiniteMonkeys.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InfiniteMonkeys/Pods-InfiniteMonkeys.debug.xcconfig"; sourceTree = "<group>"; };
 		6B50FFE2EA4F8CB40C8C23B9 /* Pods_InfiniteMonkeys.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InfiniteMonkeys.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D014FC01D31314300425449 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		6DFCB3D11D26974A00FC5458 /* InfiniteMonkeys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InfiniteMonkeys.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DFCB3D41D26974A00FC5458 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6DFCB3D61D26974A00FC5458 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +68,7 @@
 		6DFCB3C81D26974A00FC5458 = {
 			isa = PBXGroup;
 			children = (
+				6D014FC01D31314300425449 /* Podfile */,
 				6DFCB3D31D26974A00FC5458 /* InfiniteMonkeys */,
 				6DFCB3E31D26976700FC5458 /* Frameworks */,
 				6DFCB3D21D26974A00FC5458 /* Products */,
