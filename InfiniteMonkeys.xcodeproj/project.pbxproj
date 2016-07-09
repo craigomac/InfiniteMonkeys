@@ -7,20 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B60370AD98312FAB15D7AD9 /* Pods_InfiniteMonkeys.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B50FFE2EA4F8CB40C8C23B9 /* Pods_InfiniteMonkeys.framework */; };
 		6DFCB3D51D26974A00FC5458 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFCB3D41D26974A00FC5458 /* AppDelegate.swift */; };
 		6DFCB3D71D26974A00FC5458 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFCB3D61D26974A00FC5458 /* ViewController.swift */; };
 		6DFCB3D91D26974A00FC5458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DFCB3D81D26974A00FC5458 /* Assets.xcassets */; };
 		6DFCB3DC1D26974A00FC5458 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DFCB3DA1D26974A00FC5458 /* Main.storyboard */; };
-		6DFCB3E61D26976700FC5458 /* BrainCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DFCB3E41D26976700FC5458 /* BrainCore.framework */; };
-		6DFCB3E71D26976700FC5458 /* Upsurge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DFCB3E51D26976700FC5458 /* Upsurge.framework */; };
-		6DFCB3E81D26976C00FC5458 /* BrainCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DFCB3E41D26976700FC5458 /* BrainCore.framework */; };
-		6DFCB3E91D26976C00FC5458 /* BrainCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DFCB3E41D26976700FC5458 /* BrainCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6DFCB3EA1D26976C00FC5458 /* Upsurge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DFCB3E51D26976700FC5458 /* Upsurge.framework */; };
-		6DFCB3EB1D26976C00FC5458 /* Upsurge.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DFCB3E51D26976700FC5458 /* Upsurge.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6DFCB3EE1D26987200FC5458 /* lstm_text_generation_weights.h5 in Resources */ = {isa = PBXBuildFile; fileRef = 6DFCB3ED1D26987200FC5458 /* lstm_text_generation_weights.h5 */; };
-		6DFCB3F01D2698EE00FC5458 /* HDF5Kit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DFCB3EF1D2698EE00FC5458 /* HDF5Kit.framework */; };
-		6DFCB3F11D2698F400FC5458 /* HDF5Kit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DFCB3EF1D2698EE00FC5458 /* HDF5Kit.framework */; };
-		6DFCB3F21D2698F400FC5458 /* HDF5Kit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DFCB3EF1D2698EE00FC5458 /* HDF5Kit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6DFCB3F61D2719B400FC5458 /* Poet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFCB3F51D2719B400FC5458 /* Poet.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,9 +23,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6DFCB3EB1D26976C00FC5458 /* Upsurge.framework in Embed Frameworks */,
-				6DFCB3F21D2698F400FC5458 /* HDF5Kit.framework in Embed Frameworks */,
-				6DFCB3E91D26976C00FC5458 /* BrainCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -41,17 +30,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		55B5FB370C546970D94E5F35 /* Pods-InfiniteMonkeys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfiniteMonkeys.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InfiniteMonkeys/Pods-InfiniteMonkeys.debug.xcconfig"; sourceTree = "<group>"; };
+		6B50FFE2EA4F8CB40C8C23B9 /* Pods_InfiniteMonkeys.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InfiniteMonkeys.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DFCB3D11D26974A00FC5458 /* InfiniteMonkeys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InfiniteMonkeys.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DFCB3D41D26974A00FC5458 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6DFCB3D61D26974A00FC5458 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6DFCB3D81D26974A00FC5458 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6DFCB3DB1D26974A00FC5458 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6DFCB3DD1D26974A00FC5458 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6DFCB3E41D26976700FC5458 /* BrainCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BrainCore.framework; sourceTree = "<group>"; };
-		6DFCB3E51D26976700FC5458 /* Upsurge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Upsurge.framework; sourceTree = "<group>"; };
 		6DFCB3ED1D26987200FC5458 /* lstm_text_generation_weights.h5 */ = {isa = PBXFileReference; lastKnownFileType = file; path = lstm_text_generation_weights.h5; sourceTree = "<group>"; };
-		6DFCB3EF1D2698EE00FC5458 /* HDF5Kit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HDF5Kit.framework; sourceTree = "<group>"; };
 		6DFCB3F51D2719B400FC5458 /* Poet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Poet.swift; sourceTree = "<group>"; };
+		DFCE90F2E19BF17F9C6BA8BA /* Pods-InfiniteMonkeys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfiniteMonkeys.release.xcconfig"; path = "Pods/Target Support Files/Pods-InfiniteMonkeys/Pods-InfiniteMonkeys.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,24 +48,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DFCB3EA1D26976C00FC5458 /* Upsurge.framework in Frameworks */,
-				6DFCB3E81D26976C00FC5458 /* BrainCore.framework in Frameworks */,
-				6DFCB3E71D26976700FC5458 /* Upsurge.framework in Frameworks */,
-				6DFCB3E61D26976700FC5458 /* BrainCore.framework in Frameworks */,
-				6DFCB3F11D2698F400FC5458 /* HDF5Kit.framework in Frameworks */,
-				6DFCB3F01D2698EE00FC5458 /* HDF5Kit.framework in Frameworks */,
+				6B60370AD98312FAB15D7AD9 /* Pods_InfiniteMonkeys.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36FC2DD2EAE0A0FA15D27D65 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				55B5FB370C546970D94E5F35 /* Pods-InfiniteMonkeys.debug.xcconfig */,
+				DFCE90F2E19BF17F9C6BA8BA /* Pods-InfiniteMonkeys.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		6DFCB3C81D26974A00FC5458 = {
 			isa = PBXGroup;
 			children = (
-				6DFCB3E31D26976700FC5458 /* Frameworks */,
 				6DFCB3D31D26974A00FC5458 /* InfiniteMonkeys */,
+				6DFCB3E31D26976700FC5458 /* Frameworks */,
 				6DFCB3D21D26974A00FC5458 /* Products */,
+				36FC2DD2EAE0A0FA15D27D65 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,9 +99,7 @@
 		6DFCB3E31D26976700FC5458 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6DFCB3EF1D2698EE00FC5458 /* HDF5Kit.framework */,
-				6DFCB3E41D26976700FC5458 /* BrainCore.framework */,
-				6DFCB3E51D26976700FC5458 /* Upsurge.framework */,
+				6B50FFE2EA4F8CB40C8C23B9 /* Pods_InfiniteMonkeys.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -119,10 +111,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6DFCB3E01D26974A00FC5458 /* Build configuration list for PBXNativeTarget "InfiniteMonkeys" */;
 			buildPhases = (
+				8FA4DC2D132FA3423604085E /* [CP] Check Pods Manifest.lock */,
 				6DFCB3CD1D26974A00FC5458 /* Sources */,
 				6DFCB3CE1D26974A00FC5458 /* Frameworks */,
 				6DFCB3CF1D26974A00FC5458 /* Resources */,
 				6DFCB3EC1D26976C00FC5458 /* Embed Frameworks */,
+				0D9220FBE716B54E0BFE3098 /* [CP] Embed Pods Frameworks */,
+				35B8CE38F89291BDDBB32473 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -178,6 +173,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0D9220FBE716B54E0BFE3098 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InfiniteMonkeys/Pods-InfiniteMonkeys-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		35B8CE38F89291BDDBB32473 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InfiniteMonkeys/Pods-InfiniteMonkeys-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8FA4DC2D132FA3423604085E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6DFCB3CD1D26974A00FC5458 /* Sources */ = {
@@ -288,6 +331,7 @@
 		};
 		6DFCB3E11D26974A00FC5458 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55B5FB370C546970D94E5F35 /* Pods-InfiniteMonkeys.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -304,6 +348,7 @@
 		};
 		6DFCB3E21D26974A00FC5458 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DFCE90F2E19BF17F9C6BA8BA /* Pods-InfiniteMonkeys.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
