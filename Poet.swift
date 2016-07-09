@@ -8,6 +8,7 @@
 import BrainCore
 import Upsurge
 import HDF5Kit
+import Metal
 
 /// This class generates characters from weights trained by the Keras example `lstm_text_generation.py`.
 class Poet {

@@ -8,12 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		6B60370AD98312FAB15D7AD9 /* Pods_InfiniteMonkeys.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B50FFE2EA4F8CB40C8C23B9 /* Pods_InfiniteMonkeys.framework */; };
+		6D014FC91D3134ED00425449 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D014FC81D3134ED00425449 /* AppDelegate.swift */; };
+		6D014FCB1D3134ED00425449 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D014FCA1D3134ED00425449 /* ViewController.swift */; };
+		6D014FCE1D3134ED00425449 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D014FCC1D3134ED00425449 /* Main.storyboard */; };
+		6D014FD01D3134ED00425449 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D014FCF1D3134ED00425449 /* Assets.xcassets */; };
+		6D014FD31D3134ED00425449 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D014FD11D3134ED00425449 /* LaunchScreen.storyboard */; };
+		6D014FD91D31359200425449 /* Poet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D014FD81D31359200425449 /* Poet.swift */; };
+		6D014FDA1D31359200425449 /* Poet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D014FD81D31359200425449 /* Poet.swift */; };
+		6D014FDC1D31388D00425449 /* lstm_text_generation_weights.h5 in Resources */ = {isa = PBXBuildFile; fileRef = 6D014FDB1D31388D00425449 /* lstm_text_generation_weights.h5 */; };
+		6D014FDD1D31388D00425449 /* lstm_text_generation_weights.h5 in Resources */ = {isa = PBXBuildFile; fileRef = 6D014FDB1D31388D00425449 /* lstm_text_generation_weights.h5 */; };
 		6DFCB3D51D26974A00FC5458 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFCB3D41D26974A00FC5458 /* AppDelegate.swift */; };
 		6DFCB3D71D26974A00FC5458 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFCB3D61D26974A00FC5458 /* ViewController.swift */; };
 		6DFCB3D91D26974A00FC5458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DFCB3D81D26974A00FC5458 /* Assets.xcassets */; };
 		6DFCB3DC1D26974A00FC5458 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DFCB3DA1D26974A00FC5458 /* Main.storyboard */; };
-		6DFCB3EE1D26987200FC5458 /* lstm_text_generation_weights.h5 in Resources */ = {isa = PBXBuildFile; fileRef = 6DFCB3ED1D26987200FC5458 /* lstm_text_generation_weights.h5 */; };
-		6DFCB3F61D2719B400FC5458 /* Poet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFCB3F51D2719B400FC5458 /* Poet.swift */; };
+		EC718C939E75FC7311D52765 /* Pods_InfiniteMonkeysApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384C20C3F10A0CBF708F4D46 /* Pods_InfiniteMonkeysApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,21 +38,39 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		384C20C3F10A0CBF708F4D46 /* Pods_InfiniteMonkeysApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InfiniteMonkeysApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B5FB370C546970D94E5F35 /* Pods-InfiniteMonkeys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfiniteMonkeys.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InfiniteMonkeys/Pods-InfiniteMonkeys.debug.xcconfig"; sourceTree = "<group>"; };
 		6B50FFE2EA4F8CB40C8C23B9 /* Pods_InfiniteMonkeys.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InfiniteMonkeys.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D014FC01D31314300425449 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		6D014FC61D3134ED00425449 /* InfiniteMonkeysApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InfiniteMonkeysApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D014FC81D3134ED00425449 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6D014FCA1D3134ED00425449 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6D014FCD1D3134ED00425449 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6D014FCF1D3134ED00425449 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6D014FD21D3134ED00425449 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6D014FD41D3134ED00425449 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D014FD81D31359200425449 /* Poet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Poet.swift; sourceTree = "<group>"; };
+		6D014FDB1D31388D00425449 /* lstm_text_generation_weights.h5 */ = {isa = PBXFileReference; lastKnownFileType = file; path = lstm_text_generation_weights.h5; sourceTree = "<group>"; };
 		6DFCB3D11D26974A00FC5458 /* InfiniteMonkeys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InfiniteMonkeys.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DFCB3D41D26974A00FC5458 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6DFCB3D61D26974A00FC5458 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6DFCB3D81D26974A00FC5458 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6DFCB3DB1D26974A00FC5458 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6DFCB3DD1D26974A00FC5458 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6DFCB3ED1D26987200FC5458 /* lstm_text_generation_weights.h5 */ = {isa = PBXFileReference; lastKnownFileType = file; path = lstm_text_generation_weights.h5; sourceTree = "<group>"; };
-		6DFCB3F51D2719B400FC5458 /* Poet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Poet.swift; sourceTree = "<group>"; };
+		D617FBF0F88CB3383903B13F /* Pods-InfiniteMonkeysApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfiniteMonkeysApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-InfiniteMonkeysApp/Pods-InfiniteMonkeysApp.release.xcconfig"; sourceTree = "<group>"; };
 		DFCE90F2E19BF17F9C6BA8BA /* Pods-InfiniteMonkeys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfiniteMonkeys.release.xcconfig"; path = "Pods/Target Support Files/Pods-InfiniteMonkeys/Pods-InfiniteMonkeys.release.xcconfig"; sourceTree = "<group>"; };
+		F2CC46AD50193815333D0D4B /* Pods-InfiniteMonkeysApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfiniteMonkeysApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InfiniteMonkeysApp/Pods-InfiniteMonkeysApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6D014FC31D3134ED00425449 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC718C939E75FC7311D52765 /* Pods_InfiniteMonkeysApp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6DFCB3CE1D26974A00FC5458 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -61,15 +87,33 @@
 			children = (
 				55B5FB370C546970D94E5F35 /* Pods-InfiniteMonkeys.debug.xcconfig */,
 				DFCE90F2E19BF17F9C6BA8BA /* Pods-InfiniteMonkeys.release.xcconfig */,
+				F2CC46AD50193815333D0D4B /* Pods-InfiniteMonkeysApp.debug.xcconfig */,
+				D617FBF0F88CB3383903B13F /* Pods-InfiniteMonkeysApp.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		6D014FC71D3134ED00425449 /* InfiniteMonkeysApp */ = {
+			isa = PBXGroup;
+			children = (
+				6D014FC81D3134ED00425449 /* AppDelegate.swift */,
+				6D014FCA1D3134ED00425449 /* ViewController.swift */,
+				6D014FCC1D3134ED00425449 /* Main.storyboard */,
+				6D014FCF1D3134ED00425449 /* Assets.xcassets */,
+				6D014FD11D3134ED00425449 /* LaunchScreen.storyboard */,
+				6D014FD41D3134ED00425449 /* Info.plist */,
+			);
+			path = InfiniteMonkeysApp;
 			sourceTree = "<group>";
 		};
 		6DFCB3C81D26974A00FC5458 = {
 			isa = PBXGroup;
 			children = (
 				6D014FC01D31314300425449 /* Podfile */,
+				6D014FD81D31359200425449 /* Poet.swift */,
+				6D014FDB1D31388D00425449 /* lstm_text_generation_weights.h5 */,
 				6DFCB3D31D26974A00FC5458 /* InfiniteMonkeys */,
+				6D014FC71D3134ED00425449 /* InfiniteMonkeysApp */,
 				6DFCB3E31D26976700FC5458 /* Frameworks */,
 				6DFCB3D21D26974A00FC5458 /* Products */,
 				36FC2DD2EAE0A0FA15D27D65 /* Pods */,
@@ -80,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				6DFCB3D11D26974A00FC5458 /* InfiniteMonkeys.app */,
+				6D014FC61D3134ED00425449 /* InfiniteMonkeysApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,11 +132,9 @@
 		6DFCB3D31D26974A00FC5458 /* InfiniteMonkeys */ = {
 			isa = PBXGroup;
 			children = (
-				6DFCB3F51D2719B400FC5458 /* Poet.swift */,
 				6DFCB3D41D26974A00FC5458 /* AppDelegate.swift */,
 				6DFCB3D61D26974A00FC5458 /* ViewController.swift */,
 				6DFCB3D81D26974A00FC5458 /* Assets.xcassets */,
-				6DFCB3ED1D26987200FC5458 /* lstm_text_generation_weights.h5 */,
 				6DFCB3DA1D26974A00FC5458 /* Main.storyboard */,
 				6DFCB3DD1D26974A00FC5458 /* Info.plist */,
 			);
@@ -102,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				6B50FFE2EA4F8CB40C8C23B9 /* Pods_InfiniteMonkeys.framework */,
+				384C20C3F10A0CBF708F4D46 /* Pods_InfiniteMonkeysApp.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -109,6 +153,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6D014FC51D3134ED00425449 /* InfiniteMonkeysApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D014FD51D3134ED00425449 /* Build configuration list for PBXNativeTarget "InfiniteMonkeysApp" */;
+			buildPhases = (
+				856FADC3A497CDA4C6BDF8B2 /* [CP] Check Pods Manifest.lock */,
+				6D014FC21D3134ED00425449 /* Sources */,
+				6D014FC31D3134ED00425449 /* Frameworks */,
+				6D014FC41D3134ED00425449 /* Resources */,
+				5E8930EC6F707509929650AC /* [CP] Embed Pods Frameworks */,
+				874882678421568FDB0A023A /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = InfiniteMonkeysApp;
+			productName = InfiniteMonkeysApp;
+			productReference = 6D014FC61D3134ED00425449 /* InfiniteMonkeysApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 		6DFCB3D01D26974A00FC5458 /* InfiniteMonkeys */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6DFCB3E01D26974A00FC5458 /* Build configuration list for PBXNativeTarget "InfiniteMonkeys" */;
@@ -140,6 +204,9 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = handform;
 				TargetAttributes = {
+					6D014FC51D3134ED00425449 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					6DFCB3D01D26974A00FC5458 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -159,18 +226,30 @@
 			projectRoot = "";
 			targets = (
 				6DFCB3D01D26974A00FC5458 /* InfiniteMonkeys */,
+				6D014FC51D3134ED00425449 /* InfiniteMonkeysApp */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6D014FC41D3134ED00425449 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D014FD31D3134ED00425449 /* LaunchScreen.storyboard in Resources */,
+				6D014FD01D3134ED00425449 /* Assets.xcassets in Resources */,
+				6D014FCE1D3134ED00425449 /* Main.storyboard in Resources */,
+				6D014FDD1D31388D00425449 /* lstm_text_generation_weights.h5 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6DFCB3CF1D26974A00FC5458 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				6DFCB3D91D26974A00FC5458 /* Assets.xcassets in Resources */,
-				6DFCB3EE1D26987200FC5458 /* lstm_text_generation_weights.h5 in Resources */,
 				6DFCB3DC1D26974A00FC5458 /* Main.storyboard in Resources */,
+				6D014FDC1D31388D00425449 /* lstm_text_generation_weights.h5 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +286,51 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InfiniteMonkeys/Pods-InfiniteMonkeys-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5E8930EC6F707509929650AC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InfiniteMonkeysApp/Pods-InfiniteMonkeysApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		856FADC3A497CDA4C6BDF8B2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		874882678421568FDB0A023A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InfiniteMonkeysApp/Pods-InfiniteMonkeysApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8FA4DC2D132FA3423604085E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -225,12 +349,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6D014FC21D3134ED00425449 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D014FCB1D3134ED00425449 /* ViewController.swift in Sources */,
+				6D014FDA1D31359200425449 /* Poet.swift in Sources */,
+				6D014FC91D3134ED00425449 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6DFCB3CD1D26974A00FC5458 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				6DFCB3D71D26974A00FC5458 /* ViewController.swift in Sources */,
-				6DFCB3F61D2719B400FC5458 /* Poet.swift in Sources */,
+				6D014FD91D31359200425449 /* Poet.swift in Sources */,
 				6DFCB3D51D26974A00FC5458 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,6 +372,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		6D014FCC1D3134ED00425449 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6D014FCD1D3134ED00425449 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6D014FD11D3134ED00425449 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6D014FD21D3134ED00425449 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		6DFCB3DA1D26974A00FC5458 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -249,6 +399,39 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6D014FD61D3134ED00425449 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F2CC46AD50193815333D0D4B /* Pods-InfiniteMonkeysApp.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = InfiniteMonkeysApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.handform.InfiniteMonkeysApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6D014FD71D3134ED00425449 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D617FBF0F88CB3383903B13F /* Pods-InfiniteMonkeysApp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = InfiniteMonkeysApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.handform.InfiniteMonkeysApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		6DFCB3DE1D26974A00FC5458 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -368,6 +551,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6D014FD51D3134ED00425449 /* Build configuration list for PBXNativeTarget "InfiniteMonkeysApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D014FD61D3134ED00425449 /* Debug */,
+				6D014FD71D3134ED00425449 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6DFCB3CC1D26974A00FC5458 /* Build configuration list for PBXProject "InfiniteMonkeys" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

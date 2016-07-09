@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>InfiniteMonkeysApp.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>6D014FC51D3134ED00425449</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>6DFCB3D01D26974A00FC5458</key>
 		<dict>
 			<key>primary</key>

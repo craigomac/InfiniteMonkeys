@@ -684,7 +684,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" red="0.94120234251022339" green="0.93744271993637085" blue="0.9289289116859436" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <size key="minSize" width="623" height="417"/>
-                                            <size key="maxSize" width="623" height="10000000"/>
+                                            <size key="maxSize" width="640" height="10000000"/>
                                             <attributedString key="textStorage">
                                                 <fragment content=" ">
                                                     <attributes>
@@ -695,7 +695,7 @@
                                             </attributedString>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <size key="minSize" width="623" height="417"/>
-                                            <size key="maxSize" width="623" height="10000000"/>
+                                            <size key="maxSize" width="640" height="10000000"/>
                                         </textView>
                                     </subviews>
                                     <color key="backgroundColor" red="0.94120234251022339" green="0.93744271993637085" blue="0.9289289116859436" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
