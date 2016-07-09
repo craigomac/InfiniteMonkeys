@@ -725,7 +725,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="192" id="OIN-kp-fhv"/>
                                 </constraints>
-                                <sliderCell key="cell" lineBreakMode="charWrapping" state="on" alignment="left" minValue="0.10000000000000001" maxValue="1.5" doubleValue="0.80000000000000004" tickMarkPosition="above" numberOfTickMarks="10" sliderType="linear" id="67H-h0-Jvi"/>
+                                <sliderCell key="cell" lineBreakMode="charWrapping" continuous="YES" state="on" alignment="left" minValue="0.10000000000000001" maxValue="1.5" doubleValue="0.80000000000000004" tickMarkPosition="above" numberOfTickMarks="10" sliderType="linear" id="67H-h0-Jvi"/>
                                 <connections>
                                     <action selector="adjustedTemperatureSlider:" target="XfG-lQ-9wD" id="zdV-MP-Fm3"/>
                                 </connections>

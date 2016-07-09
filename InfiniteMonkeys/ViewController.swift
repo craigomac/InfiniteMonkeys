@@ -38,18 +38,28 @@ class ViewController: NSViewController {
             poet.prepareToEvaluate(
                 seed: "e",
                 completion: { (prepared) in
+                    self.startStopButton.enabled = true
+
                     var count = 0
-                    
+                    var buffer = ""
+
                     poet.startEvaluating({ (string) in
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.startStopButton.enabled = true
-                            
-                            count += 1
-                            let scroll = abs(NSMaxY(self.textView.visibleRect) - NSMaxY(self.textView.bounds)) < 50
-                            self.textView.textStorage?.mutableString.appendString(string)
-                            if scroll {
-                                self.textView.scrollRangeToVisible(NSMakeRange(count, 0))
+                        buffer += string
+                        count += 1
+
+                        if string == " " {
+                            let bufferCopy = buffer
+                            let countCopy = count
+
+                            dispatch_async(dispatch_get_main_queue()) {
+                                let scroll = abs(NSMaxY(self.textView.visibleRect) - NSMaxY(self.textView.bounds)) < 50
+                                self.textView.textStorage?.mutableString.appendString(bufferCopy)
+                                if scroll {
+                                    self.textView.scrollRangeToVisible(NSMakeRange(countCopy, 0))
+                                }
                             }
+
+                            buffer = ""
                         }
                     })
             })
@@ -59,6 +69,7 @@ class ViewController: NSViewController {
     }
     
     @IBAction func adjustedTemperatureSlider(sender: AnyObject?) {
+        temperatureSlider.toolTip = "\(temperatureSlider.floatValue ?? 0)"
         poet?.temperature = temperatureSlider.floatValue
     }
 
