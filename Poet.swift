@@ -29,7 +29,9 @@ func sample(output: ValueArray<Float>, temperature: Float) -> Int {
 class Poet {
 
     // Obtain this array by adding the line `print('chars: ', chars)` to `lstm_text_generation.py`.
-    let chars = ["\n", " ", "!", "\"", "\"", "(", ")", "*", ",", "-", ".", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ":", ";", "?", "[", "]", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "?", "?", "?", "?", "?"]
+//    let chars = ["\n", " ", "!", "\"", "\"", "(", ")", "*", ",", "-", ".", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ":", ";", "?", "[", "]", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "?", "?", "?", "?", "?"]
+    let chars = ["\n", " ", "!", "\"", "'", "(", ")", ",", "-", ".", "0", "8", ":", ";", "?", "_", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "?", "?", "?", "?", "?"]
+    
     let unitCount = 512
     let batchSize = 1
 
@@ -65,7 +67,7 @@ class Poet {
 
     func prepareToEvaluate(completion: (prepared: Bool) -> ()) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            let builder = NetworkBuilder()
+            let builder = NetworkBuilder(inputSize: self.inputSize, outputSize: self.inputSize)
             self.net = builder.loadNetFromFile(self.pathToTrainedWeights)
             self.dataLayer = builder.dataLayer     // input
             self.sinkLayer = builder.sinkLayer    // output
@@ -99,19 +101,31 @@ class Poet {
         guard evaluator != nil else {
             fatalError("Not initialized")
         }
+        
+        func sinkOutput() -> String {
+            let output = sinkLayer.data
+            let exps = output.map(expf)
+            let sum  = exps.reduce(0, combine: +)
+            let softmax = exps / sum
+            let index = sample(softmax, temperature: self.temperature)
+            return self.chars[index]
+        }
     
         // Seed
-        let input = ValueArray<Float>(count: NetworkBuilder.inputSize, repeatedValue: 0)
-        for c in seed.characters {
-            for i in 0..<NetworkBuilder.inputSize {
-                input[i] = 0
-            }
-            if let index = chars.indexOf(String(c)) {
-                input[index] = 1
-            }
-            dataLayer.data = input
+        let seedLength = seed.characters.count
+        
+        for (seedIndex, seedCharacter) in seed.characters.enumerate() {
+            
+            dataLayer.data = self.inputFromChar(String(seedCharacter)).elements
+            
             evaluator?.evaluate { _ in
-                // Ignore output
+                // Ignore output unless at the last character in the seed
+                if seedIndex == seedLength-1 {
+                    let char = sinkOutput()
+                    callback(string: char)
+                    dataLayer.data = self.inputFromChar(char).elements
+                }
+                
                 dispatch_semaphore_signal(semaphore)
             }
             dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
@@ -120,19 +134,8 @@ class Poet {
         // Run
         while true {
             evaluator?.evaluate { (snapshot) in
-                let output = sinkLayer.data
-
-                let exps = output.map(expf)
-                let sum  = exps.reduce(0, combine: +)
-                let softmax = exps / sum
-
-                let index = sample(softmax, temperature: self.temperature)
-
-                let char = self.chars[index]
-                // print(self.chars[maxIndex], terminator: "")
-
+                let char = sinkOutput()
                 callback(string: char)
-
                 dataLayer.data = self.inputFromChar(char).elements
 
                 dispatch_semaphore_signal(semaphore)

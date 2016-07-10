@@ -50,14 +50,12 @@ class Sink: SinkLayer {
 
 
 class NetworkBuilder {
-    static let inputSize = 57
-    static let outputSize = 57
-    
-    let dataLayer = Source(size: inputSize)
-    let sinkLayer = Sink(size: outputSize)
+    var dataLayer: Source
+    var sinkLayer: Sink
 
-    init() {
-
+    init(inputSize: Int, outputSize: Int) {
+        dataLayer = Source(size: inputSize)
+        sinkLayer = Sink(size: outputSize)
     }
 
     func loadNetFromFile(path: String) -> Net {
