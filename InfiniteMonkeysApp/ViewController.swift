@@ -33,38 +33,34 @@ class ViewController: UIViewController {
         startStopButton.setTitle("Stop", forState: .Normal)
         
         self.textView.text = "..."
-        
+
+        let seed = "Once upon a time"
         var buffer: String = ""
         var count = 0
         
-        if let
-            path = NSBundle.mainBundle().pathForResource("lstm_text_generation_weights", ofType: "h5"),
+        if let path = NSBundle.mainBundle().pathForResource("lstm_text_generation_weights", ofType: "h5") {
             poet = Poet(pathToTrainedWeights: path)
-        {
-            poet.prepareToEvaluate(
-                seed: "e",
-                completion: { (prepared) in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.startStopButton.enabled = true
-                    }
+            poet!.prepareToEvaluate { (prepared) in
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.startStopButton.enabled = true
+                    self.textView.text = seed
+                }
 
-                    poet.startEvaluating({ (string) in
-                        buffer = buffer + string
-                        count += 1
+                self.poet!.startEvaluating(seed: seed) { (string) in
+                    buffer = buffer + string
+                    count += 1
 
-                        if count > 5 {
-                            let bufferCopy = buffer
-                            dispatch_async(dispatch_get_main_queue()) {
-                                self.textView.text = self.textView.text + bufferCopy
-                            }
-
-                            count = 0
-                            buffer = ""
+                    if count > 5 {
+                        let bufferCopy = buffer
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.textView.text = self.textView.text + bufferCopy
                         }
-                    })
-            })
-            
-            self.poet = poet
+
+                        count = 0
+                        buffer = ""
+                    }
+                }
+            }
         }
     }
 
