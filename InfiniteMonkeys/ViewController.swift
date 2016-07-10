@@ -11,6 +11,7 @@ import Cocoa
 class ViewController: NSViewController {
 
     @IBOutlet var textView: NSTextView!
+    @IBOutlet var seedField: NSTextField!
     @IBOutlet var startStopButton: NSButton!
     @IBOutlet var temperatureSlider: NSSlider!
     
@@ -31,18 +32,24 @@ class ViewController: NSViewController {
 
         if let path = NSBundle.mainBundle().pathForResource("lstm_text_generation_weights", ofType: "h5") {
             poet = Poet(pathToTrainedWeights: path)
-            poet!.temperature = temperatureSlider.floatValue
+            
+            guard let poet = poet else {
+                // Error alert
+                return
+            }
 
-            poet!.prepareToEvaluate { (prepared) in
+            poet.temperature = temperatureSlider.floatValue
+
+            poet.prepareToEvaluate { (prepared) in
                 self.startStopButton.enabled = true
 
-                let seed = "Once upon a time"
+                let seed = self.seedField.stringValue
                 self.textView.textStorage?.setAttributedString(NSAttributedString(string: seed, attributes: [NSFontAttributeName: self.textView.font!]))
 
                 var count = 0
                 var buffer = ""
 
-                self.poet!.startEvaluating(seed: seed) { (string) in
+                self.poet?.startEvaluating(seed: seed) { (string) in
                     buffer += string
                     count += 1
 
