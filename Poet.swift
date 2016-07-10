@@ -63,7 +63,7 @@ class Poet {
         return input
     }
 
-    func prepareToEvaluate(seed seed: String, completion: (prepared: Bool) -> ()) {
+    func prepareToEvaluate(completion: (prepared: Bool) -> ()) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
             let builder = NetworkBuilder()
             self.net = builder.loadNetFromFile(self.pathToTrainedWeights)
@@ -73,49 +73,74 @@ class Poet {
         }
     }
     
-    func startEvaluating(callback: (string: String) -> ()) -> Bool {
-        guard let net = self.net, dataLayer = self.dataLayer, sinkLayer = self.sinkLayer, semaphore = self.semaphore else {
+    func startEvaluating(seed seed: String, callback: (string: String) -> ()) -> Bool {
+        guard let net = self.net else {
             return false
         }
         
         do {
-            self.evaluator = try Evaluator(net: net, device: self.device)
+            evaluator = try Evaluator(net: net, device: self.device)
         } catch {
             return false
         }
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-
-            while true {
-                guard let evaluator = self.evaluator else {
-                    return
-                }
-
-                evaluator.evaluate { (snapshot) in
-                    let output = sinkLayer.data
-                    
-                    let exps = output.map(expf)
-                    let sum  = exps.reduce(0, combine: +)
-                    let softmax = exps / sum
-                    
-                    let index = sample(softmax, temperature: self.temperature)
-                    
-                    let char = self.chars[index]
-                    // print(self.chars[maxIndex], terminator: "")
-                    
-                    callback(string: char)
-
-                    dataLayer.data = self.inputFromChar(char).elements
-
-                    dispatch_semaphore_signal(semaphore);
-                }
-                dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
-            }
+            self.evaluate(seed: seed, callback: callback)
         }
 
         return true
     }
-    
+
+    func evaluate(seed seed: String, callback: (string: String) -> ()) {
+        guard let dataLayer = self.dataLayer, sinkLayer = self.sinkLayer, semaphore = self.semaphore else {
+            fatalError("Not initialized")
+        }
+        guard let evaluator = self.evaluator else {
+            fatalError("Not initialized")
+        }
+
+        // Seed
+        let input = ValueArray<Float>(count: NetworkBuilder.inputSize, repeatedValue: 0)
+        for c in seed.characters {
+            for i in 0..<NetworkBuilder.inputSize {
+                input[i] = 0
+            }
+            if let index = chars.indexOf(String(c)) {
+                input[index] = 1
+            }
+            dataLayer.data = input
+            evaluator.evaluate { _ in
+                // Ignore output
+                dispatch_semaphore_signal(semaphore)
+            }
+            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+        }
+
+        // Run
+        while true {
+
+            evaluator.evaluate { (snapshot) in
+                let output = sinkLayer.data
+
+                let exps = output.map(expf)
+                let sum  = exps.reduce(0, combine: +)
+                let softmax = exps / sum
+
+                let index = sample(softmax, temperature: self.temperature)
+
+                let char = self.chars[index]
+                // print(self.chars[maxIndex], terminator: "")
+
+                callback(string: char)
+
+                dataLayer.data = self.inputFromChar(char).elements
+
+                dispatch_semaphore_signal(semaphore)
+            }
+            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+        }
+    }
+
     func stopEvaluating() {
         self.evaluator = nil
     }

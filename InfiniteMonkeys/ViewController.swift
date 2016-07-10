@@ -33,34 +33,35 @@ class ViewController: NSViewController {
             poet = Poet(pathToTrainedWeights: path)
             poet!.temperature = temperatureSlider.floatValue
 
-            poet!.prepareToEvaluate(
-                seed: "e",
-                completion: { (prepared) in
-                    self.startStopButton.enabled = true
+            poet!.prepareToEvaluate { (prepared) in
+                self.startStopButton.enabled = true
 
-                    var count = 0
-                    var buffer = ""
+                let seed = "Once upon a time"
+                self.textView.textStorage?.setAttributedString(NSAttributedString(string: seed, attributes: [NSFontAttributeName: self.textView.font!]))
 
-                    self.poet!.startEvaluating({ (string) in
-                        buffer += string
-                        count += 1
+                var count = 0
+                var buffer = ""
 
-                        if string == " " {
-                            let bufferCopy = buffer
-                            let countCopy = count
+                self.poet!.startEvaluating(seed: seed) { (string) in
+                    buffer += string
+                    count += 1
 
-                            dispatch_async(dispatch_get_main_queue()) {
-                                let scroll = abs(NSMaxY(self.textView.visibleRect) - NSMaxY(self.textView.bounds)) < 50
-                                self.textView.textStorage?.mutableString.appendString(bufferCopy)
-                                if scroll {
-                                    self.textView.scrollRangeToVisible(NSMakeRange(countCopy, 0))
-                                }
+                    if string == " " {
+                        let bufferCopy = buffer
+                        let countCopy = count
+
+                        dispatch_async(dispatch_get_main_queue()) {
+                            let scroll = abs(NSMaxY(self.textView.visibleRect) - NSMaxY(self.textView.bounds)) < 50
+                            self.textView.textStorage?.mutableString.appendString(bufferCopy)
+                            if scroll {
+                                self.textView.scrollRangeToVisible(NSMakeRange(countCopy, 0))
                             }
-
-                            buffer = ""
                         }
-                    })
-            })
+
+                        buffer = ""
+                    }
+                }
+            }
         }
     }
     
