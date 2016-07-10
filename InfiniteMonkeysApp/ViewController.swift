@@ -37,18 +37,16 @@ class ViewController: UIViewController {
         var buffer: String = ""
         var count = 0
         
-        if let
-            path = NSBundle.mainBundle().pathForResource("lstm_text_generation_weights", ofType: "h5"),
+        if let path = NSBundle.mainBundle().pathForResource("lstm_text_generation_weights", ofType: "h5") {
             poet = Poet(pathToTrainedWeights: path)
-        {
-            poet.prepareToEvaluate(
+            poet!.prepareToEvaluate(
                 seed: "e",
                 completion: { (prepared) in
                     dispatch_async(dispatch_get_main_queue()) {
                         self.startStopButton.enabled = true
                     }
 
-                    poet.startEvaluating({ (string) in
+                    self.poet!.startEvaluating({ (string) in
                         buffer = buffer + string
                         count += 1
 
@@ -63,8 +61,7 @@ class ViewController: UIViewController {
                         }
                     })
             })
-            
-            self.poet = poet
+
         }
     }
 

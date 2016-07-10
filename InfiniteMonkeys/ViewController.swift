@@ -29,13 +29,11 @@ class ViewController: NSViewController {
         
         self.textView.textStorage?.setAttributedString(NSAttributedString(string: "...", attributes: [NSFontAttributeName: self.textView.font!]))
 
-        if let
-            path = NSBundle.mainBundle().pathForResource("lstm_text_generation_weights", ofType: "h5"),
+        if let path = NSBundle.mainBundle().pathForResource("lstm_text_generation_weights", ofType: "h5") {
             poet = Poet(pathToTrainedWeights: path)
-        {
-            poet.temperature = temperatureSlider.floatValue
+            poet!.temperature = temperatureSlider.floatValue
 
-            poet.prepareToEvaluate(
+            poet!.prepareToEvaluate(
                 seed: "e",
                 completion: { (prepared) in
                     self.startStopButton.enabled = true
@@ -43,7 +41,7 @@ class ViewController: NSViewController {
                     var count = 0
                     var buffer = ""
 
-                    poet.startEvaluating({ (string) in
+                    self.poet!.startEvaluating({ (string) in
                         buffer += string
                         count += 1
 
@@ -63,8 +61,6 @@ class ViewController: NSViewController {
                         }
                     })
             })
-
-            self.poet = poet
         }
     }
     
