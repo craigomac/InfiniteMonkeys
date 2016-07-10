@@ -95,10 +95,11 @@ class Poet {
         guard let dataLayer = self.dataLayer, sinkLayer = self.sinkLayer, semaphore = self.semaphore else {
             fatalError("Not initialized")
         }
-        guard let evaluator = self.evaluator else {
+        
+        guard evaluator != nil else {
             fatalError("Not initialized")
         }
-
+    
         // Seed
         let input = ValueArray<Float>(count: NetworkBuilder.inputSize, repeatedValue: 0)
         for c in seed.characters {
@@ -109,7 +110,7 @@ class Poet {
                 input[index] = 1
             }
             dataLayer.data = input
-            evaluator.evaluate { _ in
+            evaluator?.evaluate { _ in
                 // Ignore output
                 dispatch_semaphore_signal(semaphore)
             }
@@ -118,8 +119,7 @@ class Poet {
 
         // Run
         while true {
-
-            evaluator.evaluate { (snapshot) in
+            evaluator?.evaluate { (snapshot) in
                 let output = sinkLayer.data
 
                 let exps = output.map(expf)
