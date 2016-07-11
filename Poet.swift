@@ -51,7 +51,15 @@ class Poet {
         }
         return d
     }
-    
+
+    var isEvaluating: Bool {
+        return evaluator != nil
+    }
+
+    var isPrepared: Bool {
+        return net != nil
+    }
+
     init(pathToTrainedWeights: String) {
         self.pathToTrainedWeights = pathToTrainedWeights
     }
@@ -133,7 +141,10 @@ class Poet {
 
         // Run
         while true {
-            evaluator?.evaluate { (snapshot) in
+            guard let evaluator = evaluator else {
+                break
+            }
+            evaluator.evaluate { (snapshot) in
                 let char = sinkOutput()
                 callback(string: char)
                 dataLayer.data = self.inputFromChar(char).elements
