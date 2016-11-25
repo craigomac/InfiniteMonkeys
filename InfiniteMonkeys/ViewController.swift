@@ -17,7 +17,7 @@ class ViewController: NSViewController {
     
     var poet: Poet?
 
-    @IBAction func clickedStartStopButton(sender: AnyObject?) {
+    @IBAction func clickedStartStopButton(_ sender: AnyObject?) {
         if let poet = self.poet {
             poet.stopEvaluating()
             startStopButton.title = "Start"
@@ -25,12 +25,12 @@ class ViewController: NSViewController {
             return
         }
 
-        startStopButton.enabled = false
+        startStopButton.isEnabled = false
         startStopButton.title = "Stop"
         
         self.textView.textStorage?.setAttributedString(NSAttributedString(string: "...", attributes: [NSFontAttributeName: self.textView.font!]))
 
-        if let path = NSBundle.mainBundle().pathForResource("lstm_text_generation_weights", ofType: "h5") {
+        if let path = Bundle.main.path(forResource: "lstm_text_generation_weights", ofType: "h5") {
             poet = Poet(pathToTrainedWeights: path)
             
             guard let poet = poet else {
@@ -41,7 +41,7 @@ class ViewController: NSViewController {
             poet.temperature = temperatureSlider.floatValue
 
             poet.prepareToEvaluate { (prepared) in
-                self.startStopButton.enabled = true
+                self.startStopButton.isEnabled = true
 
                 let seed = self.seedField.stringValue
                 self.textView.textStorage?.setAttributedString(NSAttributedString(string: seed, attributes: [NSFontAttributeName: self.textView.font!]))
@@ -49,7 +49,7 @@ class ViewController: NSViewController {
                 var count = 0
                 var buffer = ""
 
-                self.poet?.startEvaluating(seed: seed) { (string) in
+                self.poet?.startEvaluating(seed) { (string) in
                     buffer += string
                     count += 1
 
@@ -57,9 +57,9 @@ class ViewController: NSViewController {
                         let bufferCopy = buffer
                         let countCopy = count
 
-                        dispatch_async(dispatch_get_main_queue()) {
+                        DispatchQueue.main.async {
                             let scroll = abs(NSMaxY(self.textView.visibleRect) - NSMaxY(self.textView.bounds)) < 50
-                            self.textView.textStorage?.mutableString.appendString(bufferCopy)
+                            self.textView.textStorage?.mutableString.append(bufferCopy)
                             if scroll {
                                 self.textView.scrollRangeToVisible(NSMakeRange(countCopy, 0))
                             }
@@ -72,7 +72,7 @@ class ViewController: NSViewController {
         }
     }
     
-    @IBAction func adjustedTemperatureSlider(sender: AnyObject?) {
+    @IBAction func adjustedTemperatureSlider(_ sender: AnyObject?) {
         temperatureSlider.toolTip = "\(temperatureSlider.floatValue ?? 0)"
         poet?.temperature = temperatureSlider.floatValue
     }
