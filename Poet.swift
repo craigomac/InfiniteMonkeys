@@ -74,7 +74,7 @@ class Poet {
     }
 
     func prepareToEvaluate(_ completion: @escaping (_ prepared: Bool) -> ()) {
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.high).async {
+        DispatchQueue.global(qos: .default).async {
             let builder = NetworkBuilder(inputSize: self.inputSize, outputSize: self.inputSize)
             self.net = builder.loadNetFromFile(self.pathToTrainedWeights)
             self.dataLayer = builder.dataLayer     // input
@@ -94,7 +94,7 @@ class Poet {
             return false
         }
         
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+        DispatchQueue.global(qos: .default).async {
             self.evaluate(seed, callback: callback)
         }
 
@@ -136,7 +136,7 @@ class Poet {
                 
                 self.semaphore.signal()
             }
-            semaphore.wait(timeout: DispatchTime.distantFuture)
+            _ = semaphore.wait(timeout: DispatchTime.distantFuture)
         }
 
         // Run
@@ -151,7 +151,7 @@ class Poet {
 
                 self.semaphore.signal()
             }
-            semaphore.wait(timeout: DispatchTime.distantFuture)
+            _ = semaphore.wait(timeout: DispatchTime.distantFuture)
         }
     }
 

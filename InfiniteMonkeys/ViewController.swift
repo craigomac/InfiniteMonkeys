@@ -49,7 +49,7 @@ class ViewController: NSViewController {
                 var count = 0
                 var buffer = ""
 
-                self.poet?.startEvaluating(seed) { (string) in
+                _ = self.poet?.startEvaluating(seed) { (string) in
                     buffer += string
                     count += 1
 
@@ -73,7 +73,7 @@ class ViewController: NSViewController {
     }
     
     @IBAction func adjustedTemperatureSlider(_ sender: AnyObject?) {
-        temperatureSlider.toolTip = "\(temperatureSlider.floatValue ?? 0)"
+        temperatureSlider.toolTip = "\(temperatureSlider.floatValue)"
         poet?.temperature = temperatureSlider.floatValue
     }
 
