@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let path = NSBundle.mainBundle().pathForResource("lstm_text_generation_weights", ofType: "h5") else {
+        guard let path = Bundle.main.path(forResource: "lstm_text_generation_weights", ofType: "h5") else {
             fatalError("Weigths file not found")
         }
         poet = Poet(pathToTrainedWeights: path)
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         #endif
     }
 
-    @IBAction func tappedStartStopButton(sender: AnyObject?) {
+    @IBAction func tappedStartStopButton(_ sender: AnyObject?) {
         if poet?.isEvaluating ?? false {
             stop()
         } else {
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         }
 
         disableControls()
-        startStopButton.setTitle("Stop", forState: .Normal)
+        startStopButton.setTitle("Stop", for: UIControlState())
 
         if !poet.isPrepared {
             prepare {
@@ -58,13 +58,13 @@ class ViewController: UIViewController {
 
         textView.text = seedTextField.text
         poet.temperature = diversitySlider.value
-        poet.startEvaluating(seed: seedTextField.text!) { string in
+        poet.startEvaluating(seedTextField.text!) { string in
             buffer = buffer + string
             count += 1
 
             if count > 5 {
                 let bufferCopy = buffer
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     self.textView.text = self.textView.text + bufferCopy
                 }
 
@@ -74,12 +74,12 @@ class ViewController: UIViewController {
         }
     }
 
-    func prepare(completion: () -> Void) {
+    func prepare(_ completion: @escaping () -> Void) {
         textView.text = "Loading..."
-        startStopButton.enabled = false
+        startStopButton.isEnabled = false
         poet?.prepareToEvaluate { prepared in
-            dispatch_async(dispatch_get_main_queue()) {
-                self.startStopButton.enabled = true
+            DispatchQueue.main.async {
+                self.startStopButton.isEnabled = true
                 if prepared {
                     completion()
                 } else {
@@ -92,19 +92,19 @@ class ViewController: UIViewController {
     func stop() {
         poet?.stopEvaluating()
         enableControls()
-        startStopButton.setTitle("Start", forState: .Normal)
+        startStopButton.setTitle("Start", for: UIControlState())
     }
 
     func disableControls() {
         seedTextField.resignFirstResponder()
-        seedTextField.enabled = false
-        diversitySlider.enabled = false
+        seedTextField.isEnabled = false
+        diversitySlider.isEnabled = false
     }
 
     func enableControls() {
-        seedTextField.enabled = true
-        diversitySlider.enabled = true
-        startStopButton.enabled = true
+        seedTextField.isEnabled = true
+        diversitySlider.isEnabled = true
+        startStopButton.isEnabled = true
     }
 
 }

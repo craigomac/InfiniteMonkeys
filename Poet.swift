@@ -10,12 +10,12 @@ import Upsurge
 import HDF5Kit
 import Metal
 
-func sample(output: ValueArray<Float>, temperature: Float) -> Int {
+func sample(_ output: ValueArray<Float>, temperature: Float) -> Int {
     var a = log(output) / temperature
     a = exp(a) / sum(exp(a))
     
     while true {
-        for (index, prob) in a.enumerate() {
+        for (index, prob) in a.enumerated() {
             let random = Float(arc4random()) / 0xFFFFFFFF
             if random < prob {
                 return index
@@ -43,7 +43,7 @@ class Poet {
     var net: Net?
     var evaluator: Evaluator?
     var temperature: Float = 0.5
-    let semaphore = dispatch_semaphore_create(0)
+    let semaphore = DispatchSemaphore(value: 0)
 
     var device: MTLDevice {
         guard let d = MTLCreateSystemDefaultDevice() else {
@@ -64,7 +64,7 @@ class Poet {
         self.pathToTrainedWeights = pathToTrainedWeights
     }
 
-    private func inputFromChar(char: String) -> Matrix<Float> {
+    fileprivate func inputFromChar(_ char: String) -> Matrix<Float> {
         let input = Matrix<Float>(rows: 1, columns: inputSize)
         for i in 0..<inputSize {
             // "One hot" input with '1' at the index of the character we will pass in
@@ -73,17 +73,17 @@ class Poet {
         return input
     }
 
-    func prepareToEvaluate(completion: (prepared: Bool) -> ()) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+    func prepareToEvaluate(_ completion: @escaping (_ prepared: Bool) -> ()) {
+        DispatchQueue.global(qos: .default).async {
             let builder = NetworkBuilder(inputSize: self.inputSize, outputSize: self.inputSize)
             self.net = builder.loadNetFromFile(self.pathToTrainedWeights)
             self.dataLayer = builder.dataLayer     // input
             self.sinkLayer = builder.sinkLayer    // output
-            completion(prepared: true)
+            completion(true)
         }
     }
     
-    func startEvaluating(seed seed: String, callback: (string: String) -> ()) -> Bool {
+    func startEvaluating(_ seed: String, callback: @escaping (_ string: String) -> ()) -> Bool {
         guard let net = self.net else {
             return false
         }
@@ -94,15 +94,15 @@ class Poet {
             return false
         }
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            self.evaluate(seed: seed, callback: callback)
+        DispatchQueue.global(qos: .default).async {
+            self.evaluate(seed, callback: callback)
         }
 
         return true
     }
 
-    func evaluate(seed seed: String, callback: (string: String) -> ()) {
-        guard let dataLayer = self.dataLayer, sinkLayer = self.sinkLayer, semaphore = self.semaphore else {
+    func evaluate(_ seed: String, callback: @escaping (_ string: String) -> ()) {
+        guard let dataLayer = self.dataLayer, let sinkLayer = self.sinkLayer else {
             fatalError("Not initialized")
         }
         
@@ -113,7 +113,7 @@ class Poet {
         func sinkOutput() -> String {
             let output = sinkLayer.data
             let exps = output.map(expf)
-            let sum  = exps.reduce(0, combine: +)
+            let sum  = exps.reduce(0, +)
             let softmax = exps / sum
             let index = sample(softmax, temperature: self.temperature)
             return self.chars[index]
@@ -122,7 +122,7 @@ class Poet {
         // Seed
         let seedLength = seed.characters.count
         
-        for (seedIndex, seedCharacter) in seed.characters.enumerate() {
+        for (seedIndex, seedCharacter) in seed.characters.enumerated() {
             
             dataLayer.data = self.inputFromChar(String(seedCharacter)).elements
             
@@ -130,13 +130,13 @@ class Poet {
                 // Ignore output unless at the last character in the seed
                 if seedIndex == seedLength-1 {
                     let char = sinkOutput()
-                    callback(string: char)
+                    callback(char)
                     dataLayer.data = self.inputFromChar(char).elements
                 }
                 
-                dispatch_semaphore_signal(semaphore)
+                self.semaphore.signal()
             }
-            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+            _ = semaphore.wait(timeout: DispatchTime.distantFuture)
         }
 
         // Run
@@ -146,12 +146,12 @@ class Poet {
             }
             evaluator.evaluate { (snapshot) in
                 let char = sinkOutput()
-                callback(string: char)
+                callback(char)
                 dataLayer.data = self.inputFromChar(char).elements
 
-                dispatch_semaphore_signal(semaphore)
+                self.semaphore.signal()
             }
-            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+            _ = semaphore.wait(timeout: DispatchTime.distantFuture)
         }
     }
 

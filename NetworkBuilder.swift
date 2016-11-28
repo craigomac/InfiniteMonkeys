@@ -6,7 +6,9 @@ import Upsurge
 
 
 class Source: DataLayer {
-    let id = NSUUID()
+    /// Unique layer identifier
+    public var id: UUID = UUID()
+
     let name: String? = nil
 
     var size: Int
@@ -21,7 +23,7 @@ class Source: DataLayer {
         self.size = size
     }
 
-    func nextBatch(batchSize: Int) -> Blob {
+    func nextBatch(_ batchSize: Int) -> Blob {
         precondition(batchSize == 1)
         return data
     }
@@ -29,7 +31,9 @@ class Source: DataLayer {
 
 
 class Sink: SinkLayer {
-    let id = NSUUID()
+    /// Unique layer identifier
+    public var id: UUID = UUID()
+
     let name: String? = nil
 
     var size: Int
@@ -43,7 +47,7 @@ class Sink: SinkLayer {
         return size
     }
 
-    func consume(input: Blob) {
+    func consume(_ input: Blob) {
         self.data = input
     }
 }
@@ -58,8 +62,8 @@ class NetworkBuilder {
         sinkLayer = Sink(size: outputSize)
     }
 
-    func loadNetFromFile(path: String) -> Net {
-        guard let file = File.open(path, mode: .ReadOnly) else {
+    func loadNetFromFile(_ path: String) -> Net {
+        guard let file = File.open(path, mode: .readOnly) else {
             fatalError("File not found '\(path)'")
         }
 
@@ -72,24 +76,24 @@ class NetworkBuilder {
         }
     }
 
-    private func loadLSTMLayerFromFile(file: File, name: String) throws -> LSTMLayer {
+    fileprivate func loadLSTMLayerFromFile(_ file: File, name: String) throws -> LSTMLayer {
         guard let group = file.openGroup(name) else {
             fatalError("LSTM \(name) group not found in file")
         }
 
         guard let
             ucDataset = group.openFloatDataset("\(name)_U_c"),
-            ufDataset = group.openFloatDataset("\(name)_U_f"),
-            uiDataset = group.openFloatDataset("\(name)_U_i"),
-            uoDataset = group.openFloatDataset("\(name)_U_o"),
-            wcDataset = group.openFloatDataset("\(name)_W_c"),
-            wfDataset = group.openFloatDataset("\(name)_W_f"),
-            wiDataset = group.openFloatDataset("\(name)_W_i"),
-            woDataset = group.openFloatDataset("\(name)_W_o"),
-            bcDataset = group.openFloatDataset("\(name)_b_c"),
-            bfDataset = group.openFloatDataset("\(name)_b_f"),
-            biDataset = group.openFloatDataset("\(name)_b_i"),
-            boDataset = group.openFloatDataset("\(name)_b_o")
+            let ufDataset = group.openFloatDataset("\(name)_U_f"),
+            let uiDataset = group.openFloatDataset("\(name)_U_i"),
+            let uoDataset = group.openFloatDataset("\(name)_U_o"),
+            let wcDataset = group.openFloatDataset("\(name)_W_c"),
+            let wfDataset = group.openFloatDataset("\(name)_W_f"),
+            let wiDataset = group.openFloatDataset("\(name)_W_i"),
+            let woDataset = group.openFloatDataset("\(name)_W_o"),
+            let bcDataset = group.openFloatDataset("\(name)_b_c"),
+            let bfDataset = group.openFloatDataset("\(name)_b_f"),
+            let biDataset = group.openFloatDataset("\(name)_b_i"),
+            let boDataset = group.openFloatDataset("\(name)_b_o")
             else {
                 fatalError("LSTM weights for \(name) not found in file")
         }
@@ -117,16 +121,16 @@ class NetworkBuilder {
         return LSTMLayer(weights: weights, biases: biases, batchSize: 1, name: name)
     }
 
-    private func loadDenseLayerFromFile(file: File) -> InnerProductLayer {
+    fileprivate func loadDenseLayerFromFile(_ file: File) -> InnerProductLayer {
         guard let group = file.openGroup("dense_1") else {
             fatalError("Dense group not found in file")
         }
 
-        guard let weightsDataset = group.openFloatDataset("dense_1_W"), weights = try? weightsDataset.read() else {
+        guard let weightsDataset = group.openFloatDataset("dense_1_W"), let weights = try? weightsDataset.read() else {
             fatalError("Dense weights not found in file")
         }
 
-        guard let biasesDataset = group.openFloatDataset("dense_1_b"), biases = try? biasesDataset.read() else {
+        guard let biasesDataset = group.openFloatDataset("dense_1_b"), let biases = try? biasesDataset.read() else {
             fatalError("Dense biases not found in file")
         }
 
